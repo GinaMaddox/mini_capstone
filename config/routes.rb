@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get "/second_product_url" => "products#second_product_action"
   get "/products" => "products#index"
   get "/products/:id" => "products#show"
- end
+  post "products" => "products#create"
+  end
 end

@@ -24,4 +24,14 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: product_id)
     render "show.json.jbuilder"
   end
+
+  def create
+    @product = Product.new(
+    name: "shoes",
+    price: 20,
+    image_url: "",
+    description: "shoes")
+    @product.save
+    render "show.json.jbuilder"
+  end
 end
