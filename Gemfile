@@ -48,3 +48,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'unirest'
+
+gem 'tty-table'
+gem 'faker', '~> 1.8', '>= 1.8.7'
+
+
