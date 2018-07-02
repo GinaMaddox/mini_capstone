@@ -27,11 +27,39 @@ class Api::ProductsController < ApplicationController
 
   def create
     @product = Product.new(
-    name: "shoes",
-    price: 20,
-    image_url: "",
-    description: "shoes")
+    name: params[:input_name],
+    price: params[:input_price],
+    image_url: params[:input_image_url],
+    description: params[:input_description])
     @product.save
     render "show.json.jbuilder"
+  end
+
+  def update
+    product_id = params[:id]
+    @product = Product.find_by(id: product_id)
+    @product.name = params[:input_name] || @product.name,
+    @product.price = params[:input_price] || @product.price,
+    @product.image_url = params[:input_image_url] || @product.image_url,
+    @product.description = params[:input_description] || @product.description
+    @product.save
+    render "show.json.jbuilder"
+  end
+
+  # def update
+  #   @product.update(
+  #     name: params[:input_name] || @product.name,
+  #     price: params[:input_price] || @product.price,
+  #     image_url: params[:input_image_url] || @product.image_url,
+  #     description: params[:input_description] || @product.description
+  #   )
+  #   render "show.json.jbuilder"
+  # end
+
+  def destroy
+    product_id = params[:id]
+    @product = Product.find_by(id: product_id)
+    @product.destroy
+    render json: {message: "Product deleted"}
   end
 end
