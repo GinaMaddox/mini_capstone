@@ -15,7 +15,14 @@ class Api::ProductsController < ApplicationController
   # end
 
   def index
-    @products = Product.all
+    user_input = params[:search]
+    @products = Product.where('name LIKE ?', "%#{user_input}%").order(:id)
+    # user_input = params[:search]
+    # if user_input
+    #   @products = Product.where('name LIKE ?', "%#{user_input}%").order(:id)
+    # else
+    #   @products = Product.all
+    # end
     render "index.json.jbuilder"
   end
 
@@ -27,10 +34,10 @@ class Api::ProductsController < ApplicationController
 
   def create
     @product = Product.new(
-    name: params[:input_name],
-    price: params[:input_price],
-    image_url: params[:input_image_url],
-    description: params[:input_description])
+    name: params[:name],
+    price: params[:price],
+    image_url: params[:image_url],
+    description: params[:description])
     @product.save
     render "show.json.jbuilder"
   end
@@ -38,20 +45,20 @@ class Api::ProductsController < ApplicationController
   def update
     product_id = params[:id]
     @product = Product.find_by(id: product_id)
-    @product.name = params[:input_name] || @product.name,
-    @product.price = params[:input_price] || @product.price,
-    @product.image_url = params[:input_image_url] || @product.image_url,
-    @product.description = params[:input_description] || @product.description
+    @product.name = params[:name] || @product.name,
+    @product.price = params[:price] || @product.price,
+    @product.image_url = params[:image_url] || @product.image_url,
+    @product.description = params[:description] || @product.description
     @product.save
     render "show.json.jbuilder"
   end
 
   # def update
   #   @product.update(
-  #     name: params[:input_name] || @product.name,
-  #     price: params[:input_price] || @product.price,
-  #     image_url: params[:input_image_url] || @product.image_url,
-  #     description: params[:input_description] || @product.description
+  #     name: params[:name] || @product.name,
+  #     price: params[:price] || @product.price,
+  #     image_url: params[:image_url] || @product.image_url,
+  #     description: params[:description] || @product.description
   #   )
   #   render "show.json.jbuilder"
   # end
@@ -60,6 +67,6 @@ class Api::ProductsController < ApplicationController
     product_id = params[:id]
     @product = Product.find_by(id: product_id)
     @product.destroy
-    render json: {message: "Product deleted"}
+    render json: {message: "Product successfully deleted"}
   end
 end

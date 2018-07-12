@@ -6,8 +6,29 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# 10.times do 
-#    product = Product.new(name: Faker::Commerce.product_name, price: Faker::Number.decimal(2) , image_url: , description: )
-#    contact.save
-#  end
+10.times do 
+  product = Product.create(name: Faker::Commerce.product_name, price: Faker::Commerce.price, image_url: "", description: Faker::Movie.quote)
+end
 
+
+
+
+# supplier = Supplier.new(name: "Johnny", email: "asd@gmail.com", phone_number: "23456789")
+# supplier.save
+
+
+# supplier_1 = Supplier.new(name: "Antonio", email: "jsd@gmail.com", phone_number: "23452789")
+# supplier_1.save
+
+# 4.times do
+#   supplier = Supplier.create(name: Faker::Company.name, email: Faker::Internet.email, phone_number: Faker::PhoneNumber.phone_number)
+# end
+
+#add Suppliers to any existing products without one.
+suppliers = Supplier.all
+products = Product.all
+
+products.each do |product|
+  product.supplier_id = suppliers.sample.id
+  product.save
+end
