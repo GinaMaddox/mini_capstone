@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
 
   def is_discounted?
-    price < 10
+    price < 25
   end
 
   def tax
@@ -15,6 +15,14 @@ class Product < ApplicationRecord
   def supplier
     supplier_id
     Supplier.find_by(id: supplier_id)
+  end
+  
+  def images
+    Image.where(product_id: id)
+  end
+
+  def image_url
+    image_url
   end
 end
 

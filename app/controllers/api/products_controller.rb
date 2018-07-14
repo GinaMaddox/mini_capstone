@@ -16,15 +16,14 @@ class Api::ProductsController < ApplicationController
 
   def index
     user_input = params[:search]
-    @products = Product.where('name LIKE ?', "%#{user_input}%").order(:id)
-    # user_input = params[:search]
     # if user_input
-    #   @products = Product.where('name LIKE ?', "%#{user_input}%").order(:id)
+      @products = Product.where('name LIKE ?', "%#{user_input}%").order(:id)
     # else
-    #   @products = Product.all
+    # @products = Product.all
     # end
     render "index.json.jbuilder"
   end
+
 
   def show
     product_id = params[:id]
@@ -37,7 +36,8 @@ class Api::ProductsController < ApplicationController
     name: params[:name],
     price: params[:price],
     image_url: params[:image_url],
-    description: params[:description])
+    description: params[:description],
+    supplier_id: params[:supplier_id])
     @product.save
     render "show.json.jbuilder"
   end
@@ -47,7 +47,7 @@ class Api::ProductsController < ApplicationController
     @product = Product.find_by(id: product_id)
     @product.name = params[:name] || @product.name,
     @product.price = params[:price] || @product.price,
-    @product.image_url = params[:image_url] || @product.image_url,
+    # @product.image_url = params[:image_url] || @product.image_url,
     @product.description = params[:description] || @product.description
     @product.save
     render "show.json.jbuilder"

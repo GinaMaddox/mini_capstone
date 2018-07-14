@@ -1,5 +1,12 @@
 json.array! @products, partial: 'product', as: :product
 
+# @products = comes from the controller @products
+# 'product' = comes from _product file name
+# as: :product = comes from the variable |product| in original index loop (below)
+
+
+#_____________________
+
 
 # json.array! @products.each do |product|
 #   json.id product.id

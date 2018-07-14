@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times do 
-  product = Product.create(name: Faker::Commerce.product_name, price: Faker::Commerce.price, image_url: "", description: Faker::Movie.quote)
-end
+# 10.times do 
+#   product = Product.create(name: Faker::Commerce.product_name, price: Faker::Commerce.price, image_url: "", description: Faker::Movie.quote)
+# end
 
 
 
@@ -25,10 +25,26 @@ end
 # end
 
 #add Suppliers to any existing products without one.
-suppliers = Supplier.all
+# suppliers = Supplier.all
+# products = Product.all
+
+# products.each do |product|
+#   product.supplier_id = suppliers.sample.id
+#   product.save
+# end
+
+# 40.times do
+#   image = Image.create(image_url: Faker::Avatar.image)
+# end
+
+# images = Image.all
 products = Product.all
 
+# images.each do |image|
+#  image.product_id = product.image_url
+#  image.save
+# end
+
 products.each do |product|
-  product.supplier_id = suppliers.sample.id
-  product.save
+  Image.create(image_url: Faker::Avatar.image,  product_id: product.id)
 end
