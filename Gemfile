@@ -51,5 +51,5 @@ gem 'unirest'
 
 gem 'tty-table'
 gem 'faker', '~> 1.8', '>= 1.8.7'
-
+gem 'jwt'
 

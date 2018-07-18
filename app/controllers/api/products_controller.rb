@@ -16,11 +16,12 @@ class Api::ProductsController < ApplicationController
 
   def index
     user_input = params[:search]
-    # if user_input
+    if user_input
       @products = Product.where('name LIKE ?', "%#{user_input}%").order(:id)
-    # else
-    # @products = Product.all
+    else
+    @products = Product.all
     # end
+    # if params[:category]
     render "index.json.jbuilder"
   end
 
@@ -69,4 +70,5 @@ class Api::ProductsController < ApplicationController
     @product.destroy
     render json: {message: "Product successfully deleted"}
   end
+end
 end

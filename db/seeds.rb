@@ -38,13 +38,17 @@
 # end
 
 # images = Image.all
-products = Product.all
+# products = Product.all
 
 # images.each do |image|
 #  image.product_id = product.image_url
 #  image.save
 # end
 
-products.each do |product|
-  Image.create(image_url: Faker::Avatar.image,  product_id: product.id)
-end
+# products.each do |product|
+#   Image.create(image_url: Faker::Avatar.image,  product_id: product.id)
+# end
+
+order = Order.new(user_id: 2, product_id: 2, quantity: 5)
+  order.save
+
