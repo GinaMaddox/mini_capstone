@@ -17,7 +17,13 @@
   </head>
   <body>
     <div class="container">
+
       <div id="vue-app">
+        <a href="/#/signup">Signup</a>
+        <a href="/#/login">Login</a>
+        <a href="/#/logout">Logout</a>
+        <a href="/#/shoppingcart">Shopping Cart</a>
+        <a href="/#/product/new">New Product</a>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,38 +63,156 @@
 
     </div>
 
-      <div class="row">
+      <!-- <div class="row">
   
-      </div>
+      </div> -->
     </div>
+
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
 
 <template id="home-page">
-  <div class="vue-component">
-    <div v-for="product in products">
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{product.name}} </h5>
-            <h6 class="card-price">Price: ${{product.price}} </h6>
-            <p class="card-text"> What people say: "{{ product.description }}"</p>      
-            <img style="height:100px;" v-bind:src= "product.images[1].image_url">
-            <a href="/client/products/" class="btn btn-primary">View Product Details</a>
+      <div class="vue-component">
+        <div v-for="product in products">
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{product.name}} </h5>
+                <h6 class="card-price">Price: ${{product.price}} </h6>
+                <p class="card-text"> What people say: "{{ product.description }}"</p>      
+                <!-- <img style="height:100px;" v-bind:src= "product.images[1].image_url"> -->
+                <a v-bind:href="'/#/products/' + product.id" class="btn btn-primary">View Product Details</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </template>
+
+<template id="product-show-page">
+      <div class="vue-component">
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{product.name}} </h5>
+                <h6 class="card-price">Price: ${{product.price}} </h6>
+                <p class="card-text"> What people say: "{{ product.description }}"</p>      
+                <!-- <img style="height:100px;" v-bind:src= "product.images[1].image_url"> -->
+                <!-- <a href="/client/products/" class="btn btn-primary">View Product Details</a> -->
+              </div>
+            </div>
+        </div>
+      </div>
+    </template>
+    <template id="sample-page">
+      <div class="vue-component">
+        <p> {{ message }}</p>
+      </div>
+    </template>
+
+
+
+<template id="signup-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Signup</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Name:</label> 
+        <input type="text" class="form-control" v-model="name">
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <div class="form-group">
+        <label>Password confirmation:</label>
+        <input type="password" class="form-control" v-model="passwordConfirmation">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
+
   </div>
 </template>
 
-<template id="sample-page">
+
+<template id="login-page">
   <div class="vue-component">
-    <p> {{ message }}</p>
+
+    <div class="container">
+      <h1>Login</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
   </div>
 </template>
+
+<template id="product-new-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Make a New Product</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Name:</label> 
+        <input type="string" class="form-control" v-model="name">
+      </div>
+      <div class="form-group">
+        <label>Price:</label>
+        <input type="decimal" class="form-control" v-model="price">
+      </div>
+      <div class="form-group">
+        <label>Description:</label>
+        <input type="text" class="form-control" v-model="description">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+<template id="shoppingcart-page">
+      <div class="vue-component">
+        <div v-for="product in products">
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{product.name}} </h5>
+                <h6 class="card-price">Price: ${{product.price}} </h6>
+                <p class="card-text"> What people say: "{{ product.description }}"</p>      
+                <img style="height:100px;" v-bind:src= "product.images[1].image_url">
+                <a href="/client/products/" class="btn btn-primary">View Product Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+

@@ -1,5 +1,5 @@
 class Api::ProductsController < ApplicationController
-   before_action :authenticate_admin, except:[ :index, :show]
+   # before_action :authenticate_admin, except:[ :index, :show]
 
   # def all_products_action
   #   @products = Product.all
@@ -39,7 +39,7 @@ class Api::ProductsController < ApplicationController
     @product = Product.new(
       name: params[:name],
       price: params[:price],
-      image_url: params[:image_url],
+      # image_url: params[:image_url],
       description: params[:description],
       supplier_id: params[:supplier_id])
     
